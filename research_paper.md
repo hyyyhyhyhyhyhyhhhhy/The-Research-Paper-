@@ -3,6 +3,7 @@
 ## 1. What I Built
 
 I built a Hugging Face Space called **Scene Describer**, a tool that generates cinematic descriptions of a scene from different camera viewpoints based on a text prompt. Users can select a language model (e.g., distilgpt2), choose a viewpoint (such as bird’s-eye view or low angle), and adjust generation settings like temperature and top-p. The purpose of this tool is to test how well language models can reinterpret a scene and maintain spatial relationships when the perspective changes.
+
 ---
 
 ## 2. My Research Question
