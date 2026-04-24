@@ -80,19 +80,19 @@ I realized that instead of attaching a specialized vision model, I could test wh
 ## 5. Concrete Evidence from Testing
 
 - **Model comparison:**  
-  Using the same prompt (*“From a bird’s-eye view, the night city looked…”*), different parameter settings in **distilgpt2** produced very different behaviors. High temperature led to increasingly random and incoherent outputs (including numbers and symbols), while high top-p kept sentences fluent but made the content drift off-topic (e.g., describing a person’s story instead of the city) :contentReference[oaicite:6]{index=6}.
+  Using the same prompt (*“From a bird’s-eye view, the night city looked…”*), different parameter settings in **distilgpt2** produced very different behaviors. High temperature led to increasingly random and incoherent outputs (including numbers and symbols), while high top-p kept sentences fluent but made the content drift off-topic. (e.g., describing a person’s story instead of the city) 
 
 - **One output that surprised me:**  
-  When the repetition penalty was set to its maximum, the model generated a very short paragraph (20–30 words instead of ~60–70) and misunderstood the prompt by describing a literal bird instead of a city scene :contentReference[oaicite:7]{index=7}.
+  When the repetition penalty was set to its maximum, the model generated a very short paragraph (20–30 words instead of ~60–70) and misunderstood the prompt by describing a literal bird instead of a city scene.
 
 - **One prompt grid:**  
   I used a controlled testing setup where I kept the base prompt constant and changed one variable at a time (temperature, top-p, max tokens, repetition penalty). This allowed me to isolate how each parameter affected output quality and spatial description.
 
 - **One journal observation:**  
-  In earlier testing with image-based AI tools, I observed that models often distorted spatial details (e.g., bee legs, goat fur, rock textures) when changing viewpoints, showing that spatial transformation is a common challenge across both image and text systems :contentReference[oaicite:8]{index=8}.
+  In earlier testing with image-based AI tools, I observed that models often distorted spatial details (e.g., bee legs, goat fur, rock textures) when changing viewpoints, showing that spatial transformation is a common challenge across both image and text systems.
 
 - **One limitation:**  
-  A major limitation is that **distilgpt2 does not reliably follow structured viewpoint instructions**, meaning errors may come from weak instruction-following rather than true spatial reasoning ability :contentReference[oaicite:9]{index=9}.
+  A major limitation is that **distilgpt2 does not reliably follow structured viewpoint instructions**, meaning errors may come from weak instruction-following rather than true spatial reasoning ability.
 
 ---
 
@@ -102,7 +102,7 @@ From these experiments, I learned:
 
 - Language models often struggle with maintaining consistent spatial relationships.
 - Prompt structure plays a major role in improving output quality.
-- Smaller models like distilgpt2 are fast but less reliable in following instructions :contentReference[oaicite:10]{index=10}.
+- Smaller models like distilgpt2 are fast but less reliable in following instructions. 
 - Spatial reasoning is significantly more difficult than general scene description.
 
 ---
