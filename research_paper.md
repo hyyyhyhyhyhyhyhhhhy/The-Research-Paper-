@@ -15,8 +15,6 @@ This project builds on earlier exploration of image-based AI tools that directly
 
 ## 2. My Research Question
 
-My current research question is:
-
 **“How well do different language models preserve spatial relationships when generating descriptions of visual scenes?”** :contentReference[oaicite:1]{index=1}
 
 More specifically, I am interested in:
@@ -54,9 +52,7 @@ I asked both tools to rotate the scene by 90 degrees.
 
 **Findings:**
 - Some models preserved structure but distorted details (e.g., bee legs, goat fur).
-- Others struggled with textures like rocks.
-
-This suggested that spatial transformation is difficult even for image-based AI :contentReference[oaicite:3]{index=3}.
+- Others struggled with textures like rocks :contentReference[oaicite:3]{index=3}.
 
 ---
 
@@ -65,137 +61,74 @@ I built my own tool using **distilgpt2**.
 
 I tested how different generation settings affect outputs:
 - **High temperature** → more randomness and errors (numbers, symbols)
-- **High top-p** → less coherent storytelling
+- **High top-p** → less coherent but fluent outputs
 - **High max tokens** → longer but meaningless outputs
 - **High repetition penalty** → very short and sometimes incorrect outputs
 
 One surprising result:
-- Increasing repetition penalty made outputs much shorter than expected :contentReference[oaicite:4]{index=4}
-
-This showed that:
-- model behavior is very sensitive to parameter changes,
-- and the model often misunderstands viewpoint instructions.
+- Increasing repetition penalty made outputs much shorter than expected :contentReference[oaicite:4]{index=4}.
 
 ---
 
 ### Week 6 — Refining the Research Direction
-I shifted focus from just “making the tool work” to asking a deeper question about **spatial reasoning**.
+I shifted focus from just building the tool to exploring **spatial reasoning**.
 
-I realized:
-- instead of attaching a specialized vision model,
-- I could test whether language models already show spatial understanding through text alone :contentReference[oaicite:5]{index=5}.
+I realized that instead of attaching a specialized vision model, I could test whether language models already demonstrate spatial understanding through text generation alone :contentReference[oaicite:5]{index=5}.
 
 ---
 
-## 5. What I Learned
+## 5. Concrete Evidence from Testing
+
+- **Model comparison:**  
+  Using the same prompt (*“From a bird’s-eye view, the night city looked…”*), different parameter settings in **distilgpt2** produced very different behaviors. High temperature led to increasingly random and incoherent outputs (including numbers and symbols), while high top-p kept sentences fluent but made the content drift off-topic (e.g., describing a person’s story instead of the city) :contentReference[oaicite:6]{index=6}.
+
+- **One output that surprised me:**  
+  When the repetition penalty was set to its maximum, the model generated a very short paragraph (20–30 words instead of ~60–70) and misunderstood the prompt by describing a literal bird instead of a city scene :contentReference[oaicite:7]{index=7}.
+
+- **One prompt grid:**  
+  I used a controlled testing setup where I kept the base prompt constant and changed one variable at a time (temperature, top-p, max tokens, repetition penalty). This allowed me to isolate how each parameter affected output quality and spatial description.
+
+- **One journal observation:**  
+  In earlier testing with image-based AI tools, I observed that models often distorted spatial details (e.g., bee legs, goat fur, rock textures) when changing viewpoints, showing that spatial transformation is a common challenge across both image and text systems :contentReference[oaicite:8]{index=8}.
+
+- **One limitation:**  
+  A major limitation is that **distilgpt2 does not reliably follow structured viewpoint instructions**, meaning errors may come from weak instruction-following rather than true spatial reasoning ability :contentReference[oaicite:9]{index=9}.
+
+---
+
+## 6. What I Learned
 
 From these experiments, I learned:
 
-### 1. Language models do not truly “understand” space
-They often:
-- mix up positions,
-- ignore viewpoint instructions,
-- or generate inconsistent descriptions.
+- Language models often struggle with maintaining consistent spatial relationships.
+- Prompt structure plays a major role in improving output quality.
+- Smaller models like distilgpt2 are fast but less reliable in following instructions :contentReference[oaicite:10]{index=10}.
+- Spatial reasoning is significantly more difficult than general scene description.
 
 ---
 
-### 2. Prompt structure matters a lot
-Models perform better when:
-- instructions are clearer,
-- and viewpoint is explicitly stated.
+## 7. What Still Needs Work
+
+- Testing more advanced instruction-tuned models (e.g., SmolLM, Qwen)
+- Developing a clear scoring rubric for spatial accuracy
+- Expanding the range of viewpoints
+- Increasing sample size for more reliable conclusions
+- Creating a method to evaluate correctness more objectively
 
 ---
 
-### 3. Smaller models struggle more
-For example:
-- distilgpt2 is fast but often ignores instructions or produces irrelevant outputs :contentReference[oaicite:6]{index=6}.
+## 8. What Sources I Should Look For
+
+To improve this research, I should explore:
+
+- Spatial reasoning in language models  
+- Vision-language models (image + text systems)  
+- Prompt engineering techniques  
+- Evaluation methods for generative AI  
+- Effects of generation parameters (temperature, top-p, etc.)
 
 ---
 
-### 4. Spatial reasoning is harder than general description
-It is easier for models to:
-- describe a scene in general
+## 9. Conclusion (Rough)
 
-than to:
-- **reconstruct it from a different angle**
-
----
-
-## 6. What Still Needs Work
-
-There are several limitations in my project:
-
-### 1. Limited models
-- I mainly used distilgpt2
-- I need to test stronger instruction-tuned models (e.g., SmolLM, Qwen)
-
----
-
-### 2. No clear evaluation system
-Right now, I judge outputs informally.
-
-I need:
-- a scoring rubric for spatial accuracy
-- consistent criteria (e.g., correct vs incorrect relationships)
-
----
-
-### 3. Limited viewpoints
-- Only 5 camera angles are available
-- More complex transformations could give better insights
-
----
-
-### 4. No ground truth comparison
-- I don’t have a “correct answer” to compare against
-- I rely on human judgment
-
----
-
-### 5. Small sample size
-- I tested only a few prompts and examples
-- More trials are needed for stronger conclusions
-
----
-
-## 7. What Sources I Should Look For
-
-To improve this research, I should look into:
-
-### 1. Spatial reasoning in AI
-- How language models understand space
-- Common errors in spatial descriptions
-
----
-
-### 2. Vision-language models
-- Models that combine image and text understanding
-- How they handle viewpoint changes
-
----
-
-### 3. Prompt engineering
-- How structured prompts affect model performance
-- Techniques for improving instruction-following
-
----
-
-### 4. Evaluation methods for generative AI
-- How researchers measure:
-  - coherence
-  - consistency
-  - spatial accuracy
-
----
-
-### 5. Text generation parameters
-- Effects of temperature, top-p, and repetition penalty
-- How they influence output quality
-
----
-
-## 8. Conclusion (Rough)
-
-This project explores how language models handle spatial reasoning through scene description. By building and testing the Scene Describer tool, I began to see that while models can generate fluent text, they often struggle with maintaining consistent spatial relationships—especially when asked to reinterpret a scene from a new viewpoint.
-
-This opens up further questions about how AI understands space and how prompt design and model choice can improve performance.
+This project explores how language models handle spatial reasoning through scene description. By building and testing the Scene Describer tool, I found that while models can generate fluent text, they often struggle to maintain consistent spatial relationships—especially when asked to reinterpret a scene from a new viewpoint. This suggests that spatial reasoning remains a key limitation in current AI systems and highlights the importance of prompt design and model selection in improving performance. 
