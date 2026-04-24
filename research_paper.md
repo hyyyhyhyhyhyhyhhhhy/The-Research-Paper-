@@ -2,15 +2,7 @@
 
 ## 1. What I Built
 
-Over the past few weeks, I built a Hugging Face Space called **Scene Describer**, which generates cinematic descriptions of a scene based on a user’s prompt and a selected camera viewpoint. The system allows users to:
-- choose a language model (e.g., distilgpt2),
-- select a viewpoint (e.g., bird’s-eye view, low angle),
-- adjust generation parameters like temperature, top-p, and repetition penalty.
-
-The goal of this tool is to simulate how AI can “rethink” or reinterpret a scene from different perspectives using only text generation.
-
-This project builds on earlier exploration of image-based AI tools that directly modify images from different angles, such as the Qwen-based spaces I tested in Week 4 :contentReference[oaicite:0]{index=0}. However, instead of editing images, my tool focuses on **text-based reconstruction of scenes**.
-
+I built a Hugging Face Space called **Scene Describer**, a tool that generates cinematic descriptions of a scene from different camera viewpoints based on a text prompt. Users can select a language model (e.g., distilgpt2), choose a viewpoint (such as bird’s-eye view or low angle), and adjust generation settings like temperature and top-p. The purpose of this tool is to test how well language models can reinterpret a scene and maintain spatial relationships when the perspective changes.
 ---
 
 ## 2. My Research Question
