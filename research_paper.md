@@ -8,7 +8,7 @@ I built a Hugging Face Space called **Scene Describer**, a tool that generates c
 
 ## 2. My Research Question
 
-**“How well do different language models preserve spatial relationships when generating descriptions of visual scenes?”** :contentReference[oaicite:1]{index=1}
+**“How well do different language models preserve spatial relationships when generating descriptions of visual scenes?”** 
 
 More specifically, I am interested in:
 - whether models maintain correct spatial relationships (left/right, above/below, distance),
@@ -24,7 +24,7 @@ I became interested in this topic when I explored AI tools that can change the a
 - textures,
 - and depth perception.
 
-For example, when I tested image-based tools, I saw issues like distorted animal features and inconsistent textures :contentReference[oaicite:2]{index=2}. This made me wonder:
+For example, when I tested image-based tools, I saw issues like distorted animal features and inconsistent textures. This made me wonder:
 
 > If AI struggles visually with spatial transformations, does it also struggle when describing them in text?
 
@@ -45,7 +45,7 @@ I asked both tools to rotate the scene by 90 degrees.
 
 **Findings:**
 - Some models preserved structure but distorted details (e.g., bee legs, goat fur).
-- Others struggled with textures like rocks :contentReference[oaicite:3]{index=3}.
+- Others struggled with textures like rocks.
 
 ---
 
@@ -59,14 +59,14 @@ I tested how different generation settings affect outputs:
 - **High repetition penalty** → very short and sometimes incorrect outputs
 
 One surprising result:
-- Increasing repetition penalty made outputs much shorter than expected :contentReference[oaicite:4]{index=4}.
+- Increasing repetition penalty made outputs much shorter than expected.
 
 ---
 
 ### Week 6 — Refining the Research Direction
 I shifted focus from just building the tool to exploring **spatial reasoning**.
 
-I realized that instead of attaching a specialized vision model, I could test whether language models already demonstrate spatial understanding through text generation alone :contentReference[oaicite:5]{index=5}.
+I realized that instead of attaching a specialized vision model, I could test whether language models already demonstrate spatial understanding through text generation alone.
 
 ---
 
