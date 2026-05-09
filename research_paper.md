@@ -37,11 +37,11 @@ This question matters to me because it connects to a bigger idea:
 ## 4. What I Tried
 
 ### Week 4 — Comparing Image-Based Tools
-I tested multiple Hugging Face spaces that change the angle of images. I used:
-- a bee on a flower
-- a goat on a mountain
+I tested multiple Hugging Face models that change the angle of images. I used prompts:
+- "from the night sky, the city looked: "
+- "a goat standing on a cliff, looking down"
 
-I asked both tools to rotate the scene by 90 degrees.
+I asked HuggingFaceTB/SmolLM2-135M-Instruct, Qwen/Qwen2.5-0.5B-Instruct, and distilgpt2 to generate a new scene description through 5 perspectives seperatly: a close-up, a bird's-eye-view, an over-the-shoulder, a wide-shot, and a low-angle. 
 
 **Findings:**
 - Some models preserved structure but distorted details (e.g., bee legs, goat fur).
