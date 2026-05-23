@@ -1,41 +1,38 @@
 # Small/Free AI Systems and the Problem of Perspective Reasoning
 
-## 1. What I Wanted to Build
+# 1. What I Wanted to Build
 
-Originally, I wanted to build an AI image-editing system capable of generating the same scene from different camera angles. The target users for this project were student researchers, indie artists, and creative developers experimenting with AI-based perspective transformation without requiring expensive hardware or advanced technical experience. The more interesting version of the idea was not simply “changing the angle of an image,” but testing whether AI systems actually understand the spatial consequences of changing perspective.
+Originally, I wanted to build lightweight AI systems that could reinterpret the same scene from different camera perspectives while preserving spatial consistency. The target users for these systems were student researchers, indie artists, and creative developers experimenting with AI-based perspective transformation without requiring expensive hardware or advanced technical experience. The more interesting version of the idea was not simply generating fluent descriptions or edited images, but testing whether AI systems actually understand the spatial consequences of changing viewpoint.
 
-The original concept eventually became **The_Image_Editor**, a Hugging Face Space that allowed users to upload an image and generate a new version of the same scene from another viewpoint. Users could select prompts such as bird’s-eye view, low angle, side view, or over-the-shoulder while attempting to preserve the original scene identity and object placement. The deeper research question behind the project became:
-
-> “How well do different AI systems preserve spatial relationships when reinterpreting a scene from another perspective?”
+The project began with two baseline Hugging Face Spaces focused on text-generation and scene description. These systems allowed users to enter a scene prompt, select a camera perspective such as bird’s-eye view or low angle, and compare how different language models described the same environment from multiple viewpoints. The original goal was to study whether smaller language models could preserve spatial relationships consistently through text before expanding toward more advanced image-based perspective transformation systems.
 
 ---
 
-# 2. The Rudimentary Baseline (Space 2)
+# 2. The Rudimentary Baseline (Space 1-2)
 
-The first major system I built was **The_Image_Editor**. The Space used lightweight image-editing models running on free Hugging Face CPU hardware. I experimented with models including:
-- Qwen Image Edit
-- SD Turbo
-- several smaller image-editing systems
+After building the original Scene Describer systems, I expanded the project into **The_Image_Editor**, a Hugging Face Space focused on AI image-based perspective transformation. The system attempted to generate alternate-angle versions of uploaded images using lightweight image-editing models running on free Hugging Face CPU hardware. I experimented with:
+- Qwen Image Edit,
+- SD Turbo,
+- and several other lightweight image-editing systems.
 
-The basic system worked in the sense that it could:
-- accept an uploaded image,
-- interpret camera-angle prompts,
-- and generate alternate-angle outputs.
+The basic functionality worked in the sense that users could:
+- upload an image,
+- choose a new camera angle,
+- and generate an alternate perspective of the same scene.
 
-However, the results were not reliable enough to become meaningful evidence for viewpoint reasoning. Although the generated images often looked visually convincing at first glance, the systems frequently failed to preserve:
-- spatial consistency,
+However, the outputs quickly revealed major limitations. Although the generated images often appeared visually convincing at first glance, the systems struggled to preserve:
 - object proportions,
+- spatial consistency,
 - depth relationships,
 - textures,
 - and scene identity.
 
 For example:
 - animal features became distorted,
-- textures such as rocks became chaotic,
-- foreground/background relationships became inconsistent,
-- and the model sometimes invented completely new geometry.
+- textures such as rocks became unstable,
+- and foreground/background relationships frequently shifted incorrectly.
 
-The systems could imitate the *language* of perspective transformation without reliably preserving the actual spatial structure of the scene.
+The image-editing systems could imitate the *language* of camera-angle transformation without reliably preserving the deeper spatial structure of the original image. This became the first major sign that lightweight AI systems may not truly understand perspective transformation in a stable or testable way.
 
 ---
 
