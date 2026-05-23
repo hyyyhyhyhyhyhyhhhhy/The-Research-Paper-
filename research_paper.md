@@ -40,7 +40,7 @@ The image-editing systems could imitate the *language* of camera-angle transform
 
 The main constraint was hardware and model scale.
 
-More advanced image-editing and novel-view generation models exist, but most are far too computationally expensive to run reliably on free Hugging Face CPU Spaces. During testing, image generation frequently crashed before producing outputs, especially when attempting larger or more detailed viewpoint transformations.
+More advanced image-editing and novel-view generation models exist, but most are far too computationally expensive to run reliably on free Hugging Face CPU Spaces. During testing, image generation frequently crashed before producing outputs, especially when attempting larger or more detailed viewpoint transformations. It turned out, The Image Editor space can edit the angle of which a picture is taken from, but it cannot generate meaningful or testable results because the output is usually not accurate, due to the fact that the reliable image editing models are way too heavy for free CPU. 
 
 The project also encountered:
 - loading failures,
@@ -50,7 +50,7 @@ The project also encountered:
 
 One major debugging issue occurred during the early development of **The Perspective Evidence Lab**, when several models failed to generate any outputs at all. The system had to be debugged before meaningful testing could continue.
 
-This became the core wall of the project:
+This became the core wall, as well as the conclusion of the research of the project:
 
 > lightweight/free AI systems could imitate camera-angle vocabulary but struggled with genuine viewpoint consequences.
 
