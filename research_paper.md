@@ -44,9 +44,9 @@ More advanced image-editing and novel-view generation models exist, but most are
 
 Here is an example of one of the outputs the space gave out: 
 
-![The original picture](https://postimg.cc/94LMvhzY)
+![The original picture]([https://postimg.cc/94LMvhzY](https://i.postimg.cc/94LMvhzY/Screenshot-2026-05-22-222218.png))
 
-![The output](https://postimg.cc/xJQRFLJj)
+![The output]([https://postimg.cc/xJQRFLJj](https://i.postimg.cc/xJQRFLJj/Screenshot-2026-05-22-222210.png))
 
 The project also encountered:
 - loading failures,
