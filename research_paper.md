@@ -42,11 +42,7 @@ The main constraint was hardware and model scale.
 
 More advanced image-editing and novel-view generation models exist, but most are far too computationally expensive to run reliably on free Hugging Face CPU Spaces. During testing, image generation frequently crashed before producing outputs, especially when attempting larger or more detailed viewpoint transformations. It turned out, The Image Editor space can edit the angle of which a picture is taken from, but it cannot generate meaningful or testable results because the output is usually not accurate, due to the fact that the reliable image editing models are way too heavy for free CPU. 
 
-Here is an example of one of the outputs the space gave out: 
-
-![The original picture](https://postimg.cc/94LMvhzY](https://i.postimg.cc/94LMvhzY/Screenshot-2026-05-22-222218.png )
-
-![The output](https://postimg.cc/xJQRFLJj](https://i.postimg.cc/xJQRFLJj/Screenshot-2026-05-22-222210.png )
+You can find the an example of some of the outputs of the Image Editor in the other file in the repository. 
 
 The project also encountered:
 - loading failures,
