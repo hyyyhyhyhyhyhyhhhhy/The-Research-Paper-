@@ -1,127 +1,187 @@
-# Research Brief: AI Scene Description and Spatial Reasoning
+# Small/Free AI Systems and the Problem of Perspective Reasoning
 
-## 1. What I Built
+## 1. What I Wanted to Build
 
-I built a Hugging Face Space called **Scene Describer**, a tool that generates cinematic descriptions of a scene from different camera viewpoints based on a text prompt. Users can select a language model (e.g., distilgpt2), choose a viewpoint (such as bird’s-eye view or low angle), and adjust generation settings like temperature and top-p. The purpose of this tool is to test how well language models can reinterpret a scene and maintain spatial relationships when the perspective changes.
+Originally, I wanted to build an AI image-editing system capable of generating the same scene from different camera angles. The target users for this project were student researchers, indie artists, and creative developers experimenting with AI-based perspective transformation without requiring expensive hardware or advanced technical experience. The more interesting version of the idea was not simply “changing the angle of an image,” but testing whether AI systems actually understand the spatial consequences of changing perspective.
 
----
+The original concept eventually became **The_Image_Editor**, a Hugging Face Space that allowed users to upload an image and generate a new version of the same scene from another viewpoint. Users could select prompts such as bird’s-eye view, low angle, side view, or over-the-shoulder while attempting to preserve the original scene identity and object placement. The deeper research question behind the project became:
 
-## 2. My Research Question
-
-**“How well do different language models preserve spatial relationships when generating descriptions of visual scenes?”** 
-
-More specifically, I am interested in:
-- whether models maintain correct spatial relationships (left/right, above/below, distance),
-- whether they can adapt these relationships when the viewpoint changes,
-- and how well they follow structured prompts that include camera angles.
+> “How well do different AI systems preserve spatial relationships when reinterpreting a scene from another perspective?”
 
 ---
 
-## 3. Why This Matters to Me
+# 2. The Rudimentary Baseline (Space 2)
 
-I became interested in this topic when I explored AI tools that can change the angle of an image. I noticed that even strong models sometimes struggle with:
+The first major system I built was **The_Image_Editor**. The Space used lightweight image-editing models running on free Hugging Face CPU hardware. I experimented with models including:
+- Qwen Image Edit
+- SD Turbo
+- several smaller image-editing systems
+
+The basic system worked in the sense that it could:
+- accept an uploaded image,
+- interpret camera-angle prompts,
+- and generate alternate-angle outputs.
+
+However, the results were not reliable enough to become meaningful evidence for viewpoint reasoning. Although the generated images often looked visually convincing at first glance, the systems frequently failed to preserve:
+- spatial consistency,
 - object proportions,
+- depth relationships,
 - textures,
-- and depth perception.
+- and scene identity.
 
-For example, when I tested image-based tools, I saw issues like distorted animal features and inconsistent textures. This made me wonder:
+For example:
+- animal features became distorted,
+- textures such as rocks became chaotic,
+- foreground/background relationships became inconsistent,
+- and the model sometimes invented completely new geometry.
 
-> If AI struggles visually with spatial transformations, does it also struggle when describing them in text?
-
-This question matters to me because it connects to a bigger idea:
-- If AI can understand spatial relationships well, it could eventually connect text and image reasoning more effectively.
-- It also shows the limits of current AI systems beyond just generating fluent language.
-
----
-
-## 4. What I Tried
-
-### Week 4 — Comparing Image-Based Tools
-I tested multiple Hugging Face models that change the angle of images. I used prompts:
-- "from the night sky, the city looked: "
-- "a goat standing on a cliff, looking down"
-
-I asked HuggingFaceTB/SmolLM2-135M-Instruct, Qwen/Qwen2.5-0.5B-Instruct, and distilgpt2 to generate a new scene description through 5 perspectives seperatly: a close-up, a bird's-eye-view, an over-the-shoulder, a wide-shot, and a low-angle. 
-
-**Findings:**
-- Some models preserved structure but distorted details (e.g., bee legs, goat fur).
-- Others struggled with textures like rocks.
+The systems could imitate the *language* of perspective transformation without reliably preserving the actual spatial structure of the scene.
 
 ---
 
-### Week 5 — Building Scene Describer
-I built my own tool using **distilgpt2**.
+# 3. The Constraint — The Wall
 
-I tested how different generation settings affect outputs:
-- **High temperature** → more randomness and errors (numbers, symbols)
-- **High top-p** → less coherent but fluent outputs
-- **High max tokens** → longer but meaningless outputs
-- **High repetition penalty** → very short and sometimes incorrect outputs
+The main constraint was hardware and model scale.
 
-One surprising result:
-- Increasing repetition penalty made outputs much shorter than expected.
+More advanced image-editing and novel-view generation models exist, but most are far too computationally expensive to run reliably on free Hugging Face CPU Spaces. During testing, image generation frequently crashed before producing outputs, especially when attempting larger or more detailed viewpoint transformations.
 
----
+The project also encountered:
+- loading failures,
+- unstable generations,
+- quota limitations,
+- and outputs that became too inconsistent to evaluate meaningfully.
 
-### Week 6 — Refining the Research Direction
-I shifted focus from just building the tool to exploring **spatial reasoning**.
+One major debugging issue occurred during the early development of **The Perspective Evidence Lab**, when several models failed to generate any outputs at all. The system had to be debugged before meaningful testing could continue.
 
-I realized that instead of attaching a specialized vision model, I could test whether language models already demonstrate spatial understanding through text generation alone.
+This became the core wall of the project:
 
----
-
-## 5. Concrete Evidence from Testing
-
-- **Model comparison:**  
-  Using the same prompt (*“From a bird’s-eye view, the night city looked…”*), different parameter settings in **distilgpt2** produced very different behaviors. High temperature led to increasingly random and incoherent outputs (including numbers and symbols), while high top-p kept sentences fluent but made the content drift off-topic. (e.g., describing a person’s story instead of the city) 
-
-- **One output that surprised me:**  
-  When the repetition penalty was set to its maximum, the model generated a very short paragraph (20–30 words instead of ~60–70) and misunderstood the prompt by describing a literal bird instead of a city scene.
-
-- **One prompt grid:**  
-  I used a controlled testing setup where I kept the base prompt constant and changed one variable at a time (temperature, top-p, max tokens, repetition penalty). This allowed me to isolate how each parameter affected output quality and spatial description.
-
-- **One journal observation:**  
-  In earlier testing with image-based AI tools, I observed that models often distorted spatial details (e.g., bee legs, goat fur, rock textures) when changing viewpoints, showing that spatial transformation is a common challenge across both image and text systems.
-
-- **One limitation:**  
-  A major limitation is that **distilgpt2 does not reliably follow structured viewpoint instructions**, meaning errors may come from weak instruction-following rather than true spatial reasoning ability.
+> lightweight/free AI systems could imitate camera-angle vocabulary but struggled with genuine viewpoint consequences.
 
 ---
 
-## 6. What I Learned
+# 4. What I Tried First
 
-From these experiments, I learned:
+Before changing the architecture of the project, I attempted several smaller fixes and partial solutions.
 
-- Language models often struggle with maintaining consistent spatial relationships.
-- Prompt structure plays a major role in improving output quality.
-- Smaller models like distilgpt2 are fast but less reliable in following instructions. 
-- Spatial reasoning is significantly more difficult than general scene description.
+I experimented with:
+- SD Turbo,
+- Qwen Image Edit,
+- prompt restructuring,
+- different inference settings,
+- seed control,
+- and multiple lightweight image-editing pipelines.
+
+I also tested:
+- temperature,
+- top-p,
+- max token count,
+- repetition penalty,
+- and viewpoint-specific prompting strategies.
+
+One controlled prompt used throughout testing was:
+
+> “From a bird’s-eye view, the night city looked…”
+
+This prompt was repeatedly tested across:
+- close-up,
+- wide shot,
+- bird’s-eye view,
+- low angle,
+- and over-the-shoulder perspectives.
+
+Some partial improvements occurred. Certain outputs became more visually stable after adjusting parameters such as repetition penalty or prompt structure. However, the systems still failed to produce reliable spatial reasoning consistently enough for evaluation.
+
+One surprising result occurred when the repetition penalty was increased significantly while testing distilgpt2. The generated paragraph became extremely short and misunderstood the prompt completely, describing a literal bird instead of a city scene. This showed that the models often followed surface-level associations instead of maintaining viewpoint logic.
+
+These failed and partial moves were important because they revealed that the problem was not simply “finding the correct prompt,” but the deeper limitation of lightweight systems attempting perspective transformation.
 
 ---
 
-## 7. What Still Needs Work
+# 5. The Move That Worked (Space 3)
 
-- Testing more advanced instruction-tuned models (e.g., SmolLM, Qwen)
-- Developing a clear scoring rubric for spatial accuracy
-- Expanding the range of viewpoints
-- Increasing sample size for more reliable conclusions
-- Creating a method to evaluate correctness more objectively
+The major architectural shift was moving away from image generation and toward controlled viewpoint-reasoning experiments using text-generation systems.
+
+This led to the creation of **The Perspective Evidence Lab**, built using:
+- Hugging Face Spaces
+- Gradio
+- Hugging Face Transformers
+
+Instead of generating alternate-angle images directly, the new system tested whether language models could preserve spatial relationships when describing the same scene from multiple viewpoints.
+
+The Perspective Evidence Lab compared:
+- distilgpt2,
+- SmolLM2-135M-Instruct,
+- SmolLM2-360M-Instruct,
+- and Qwen/Qwen2.5-0.5B-Instruct
+
+across viewpoints such as:
+- close-up,
+- wide shot,
+- bird’s-eye view,
+- low angle,
+- and over-the-shoulder.
+
+The project shifted from evaluating image realism to evaluating measurable reasoning factors:
+- foreground/background changes,
+- visibility,
+- occlusion,
+- scale,
+- spatial relationships,
+- and viewpoint consistency.
+
+A scoring rubric was added so outputs could be systematically evaluated instead of judged informally.
+
+During rubric testing, **SmolLM2-135M-Instruct** became the most stable and reliable lightweight model for controlled perspective reasoning experiments.
+
+This move transformed the project from:
+> “trying to build a perfect image-angle generator”
+
+into:
+> “building a reproducible system for testing viewpoint reasoning under hardware constraints.”
 
 ---
 
-## 8. What Sources I Should Look For
+# 6. What the Move Cost Me
 
-To improve this research, I should explore:
+The move away from image editing came with important tradeoffs.
 
-- Spatial reasoning in language models  
-- Vision-language models (image + text systems)  
-- Prompt engineering techniques  
-- Evaluation methods for generative AI  
-- Effects of generation parameters (temperature, top-p, etc.)
+The project lost:
+- direct visual evidence,
+- realistic alternate-angle images,
+- and the original goal of fully reconstructing scenes visually from new viewpoints.
+
+Text-generation models can describe perspective changes, but they do not truly reconstruct 3D geometry or perform actual image-based spatial reasoning. Instead, they generate viewpoint-consistent descriptions through language patterns and instruction following.
+
+The project also became dependent on:
+- external Hugging Face model hosting,
+- free CPU limitations,
+- inference latency,
+- and model availability.
+
+Smaller models were more deployable, but weaker at instruction-following and spatial consistency. Larger models were stronger, but often impractical for lightweight deployment environments.
+
+This created a constant tradeoff between:
+- model capability,
+- reproducibility,
+- and deployment constraints.
 
 ---
 
-## 9. Conclusion (Rough)
+# 7. What I'd Do Next
 
-This project explores how language models handle spatial reasoning through scene description. By building and testing the Scene Describer tool, I found that while models can generate fluent text, they often struggle to maintain consistent spatial relationships—especially when asked to reinterpret a scene from a new viewpoint. This suggests that spatial reasoning remains a key limitation in current AI systems and highlights the importance of prompt design and model selection in improving performance. 
+The next stage of the project would focus on improving evaluation quality rather than simply increasing model size.
+
+Future improvements could include:
+- testing multimodal vision-language systems,
+- expanding the scoring rubric,
+- increasing the number of scene prompts,
+- testing more difficult perspective transformations,
+- and comparing text-based reasoning against image-captioning systems.
+
+I would also like to explore whether stronger multimodal models genuinely preserve spatial logic better than lightweight text-only systems.
+
+However, the main limitation remains real:
+
+> small/free AI systems can imitate viewpoint language without reliably preserving true spatial reasoning.
+
+That limitation ultimately became the central finding of the project rather than simply a technical obstacle.
